@@ -1,0 +1,185 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API MOVIES",
+    "description": "Está é uma API desenvolvida como atividade final para a disciplina de Programação com Frameworks Web",
+    "version": "1.0.0"
+  },
+  "host": "206.42.23.7:59610",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/movies": {
+      "get": {
+        "tags": [
+          "MOVIE ROUTES"
+        ],
+        "description": "Retorna TODOS os Filmes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/movies/{id}": {
+      "get": {
+        "tags": [
+          "MOVIE ROUTES"
+        ],
+        "description": "RETORNA UM Filme pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Movie ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/movie": {
+      "post": {
+        "tags": [
+          "MOVIE ROUTES"
+        ],
+        "description": "Insere um NOVO filme na Base de Dados",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Movie Data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "actor": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "ageGroup": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "genre": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/movie/{id}": {
+      "put": {
+        "tags": [
+          "MOVIE ROUTES"
+        ],
+        "description": "ATUALIZA UM Filme pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Movie ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Movie Data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "actor": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "ageGroup": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "genre": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MOVIE ROUTES"
+        ],
+        "description": "EXCLUI UM Filme pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Movie ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    }
+  }
+}
