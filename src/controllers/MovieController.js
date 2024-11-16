@@ -69,9 +69,19 @@ export default class MovieController {
 
     try {
 
-      const {title, actor, ageGroup, genre} = request.body;
+      const {
+        urlImage,
+        title,
+        actor,
+        ageGroup,
+        genre,
+        duration,
+        score,
+        description,
+        releaseYear
+      } = request.body;
 
-      if(!title || !actor || !ageGroup || !genre){
+      if(!urlImage || !title || !actor || !ageGroup || !genre || !duration || !score || !description || !releaseYear){
         response.status(422).json({
           message: "Erro ao criar o filme",
           error: "Todos os campos devem estar preenchidos"
@@ -80,10 +90,15 @@ export default class MovieController {
       }
 
       const movie = {
+        urlImage,
         title,
         actor,
         ageGroup,
-        genre
+        genre,
+        duration,
+        score,
+        description,
+        releaseYear
       }
 
       const createdMovie = await Movie.create(movie);
@@ -112,10 +127,15 @@ export default class MovieController {
         description: 'Movie Data',
         required: true,
         schema: {
+          urlImage: "string",
           title: "string",
           actor: "string",
           ageGroup: "string",
-          genre: "string"
+          genre: "string",
+          duration: "string",
+          score: "string",
+          description: "string",
+          releaseYear: "string"
         }
       }
     */
@@ -126,9 +146,19 @@ export default class MovieController {
     try {
 
       //RECEBENDO e VALIDANDO os campos
-      const {title, actor, ageGroup, genre} = request.body;
+      const {
+        urlImage,
+        title,
+        actor,
+        ageGroup,
+        genre,
+        duration,
+        score,
+        description,
+        releaseYear
+      } = request.body;
 
-      if(!title || !actor || !ageGroup || !genre){
+      if(!urlImage || !title || !actor || !ageGroup || !genre || !duration || !score || !description || !releaseYear){
         response.status(422).json({
           message: "Erro ao atualizar o filme",
           error: "Todos os campos devem estar preenchidos"
@@ -139,10 +169,15 @@ export default class MovieController {
       //CAPTURANDO O ID e chamando o método UPDATE do Sequelize
       const {id} = request.params;
       const [updated] = await Movie.update({
+        urlImage: urlImage,
         title: title,
         actor: actor,
         ageGroup: ageGroup,
-        genre: genre
+        genre: genre,
+        duration: duration,
+        score: score,
+        description: description,
+        releaseYear: releaseYear
       }, {
         where: { id: id }
       });
@@ -187,10 +222,15 @@ export default class MovieController {
         description: 'Movie Data',
         required: true,
         schema: {
+          urlImage: "string",
           title: "string",
           actor: "string",
           ageGroup: "string",
-          genre: "string"
+          genre: "string",
+          duration: "string",
+          score: "string",
+          description: "string",
+          releaseYear: "string"
         }
       }
     */

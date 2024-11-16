@@ -8,8 +8,12 @@ export default db.define("movies", {
     autoIncrement: true,
     allowNull: false
   },
+  urlImage: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   title: {
-    type: DataTypes.STRING(100),
+    type: DataTypes.STRING(50),
     allowNull: false,
   },
   actor: {
@@ -17,11 +21,27 @@ export default db.define("movies", {
     allowNull: false,
   },
   ageGroup: {
-    type: DataTypes.STRING(100),
+    type: DataTypes.STRING(20),
     allowNull: false,
   },
   genre: {
     type: DataTypes.STRING(100),
+    allowNull: false,
+  },
+  duration: {
+    type: DataTypes.STRING(10),
+    allowNull: false,
+  },
+  score: {
+    type: DataTypes.STRING(10),
+    allowNull: false,
+  },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  releaseYear: {
+    type: DataTypes.STRING(10),
     allowNull: false,
   },
   createdAt: {

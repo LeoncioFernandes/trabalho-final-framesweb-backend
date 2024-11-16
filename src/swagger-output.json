@@ -70,6 +70,10 @@
             "schema": {
               "type": "object",
               "properties": {
+                "urlImage": {
+                  "type": "string",
+                  "example": "string"
+                },
                 "title": {
                   "type": "string",
                   "example": "string"
@@ -83,6 +87,22 @@
                   "example": "string"
                 },
                 "genre": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "duration": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "score": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "releaseYear": {
                   "type": "string",
                   "example": "string"
                 }
@@ -122,6 +142,10 @@
             "schema": {
               "type": "object",
               "properties": {
+                "urlImage": {
+                  "type": "string",
+                  "example": "string"
+                },
                 "title": {
                   "type": "string",
                   "example": "string"
@@ -135,6 +159,22 @@
                   "example": "string"
                 },
                 "genre": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "duration": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "score": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "releaseYear": {
                   "type": "string",
                   "example": "string"
                 }
