@@ -1,5 +1,6 @@
 import express from 'express';
 import db from './db/db.js';
+import cors from 'cors'
 
 import MovieRouter from './routers/MovieRouter.js'
 
@@ -22,6 +23,7 @@ const swaggerSpec = swaggerJSDoc(swaggerOptions);
 const server = express();
 const PORT = 5000;
 
+server.use(cors({origin: '*'}));
 server.use(express.json());
 server.use(MovieRouter);
 
