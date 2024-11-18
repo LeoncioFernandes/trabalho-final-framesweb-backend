@@ -17,7 +17,7 @@ export default db.define("movies", {
     allowNull: false,
   },
   actor: {
-    type: DataTypes.STRING(100),
+    type: DataTypes.STRING(300),
     allowNull: false,
   },
   ageGroup: {
