@@ -4,6 +4,12 @@ export default class MovieController {
 
   static async findAll(_request, response){
 
+    /*
+      #swagger.tags = ['MOVIE ROUTES']
+      #swagger.summary = 'Encontrar TODOS os Filmes'
+      #swagger.description = 'Retorna TODOS os Filmes'
+    */
+
     try {
 
       const movies = await Movie.findAll()
@@ -18,15 +24,23 @@ export default class MovieController {
     }
 
     return;
-
-    /*
-      #swagger.tags = ['MOVIE ROUTES']
-      #swagger.description = 'Retorna TODOS os Filmes'
-    */
    
   }
 
   static async findOne(request, response){
+
+    /*
+      #swagger.tags = ['MOVIE ROUTES']
+      #swagger.summary = 'Encontrar UM Filme'
+      #swagger.description = 'RETORNA UM Filme pelo ID'
+
+      #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'Movie ID',
+        required: true,
+        type: 'integer'
+      }
+    */
 
     try {
 
@@ -51,21 +65,22 @@ export default class MovieController {
 
     return;
 
-    /*
-      #swagger.tags = ['MOVIE ROUTES']
-      #swagger.description = 'RETORNA UM Filme pelo ID'
-
-      #swagger.parameters['id'] = {
-        in: 'path',
-        description: 'Movie ID',
-        required: true,
-        type: 'integer'
-      }
-    */
-
   }
 
   static async create(request, response){
+
+    /*
+      #swagger.tags = ['MOVIE ROUTES']
+      #swagger.summary = 'Inserir UM novo Filme'
+      #swagger.description = 'Insere um NOVO filme na Base de Dados'
+
+      #swagger.parameters['body'] = { 
+        in: 'body',
+        description: 'Movie Data',
+        required: true,
+        '@schema': { $ref: "#/components/movieSchema/@schema" },
+      }
+    */
 
     try {
 
@@ -82,9 +97,67 @@ export default class MovieController {
       } = request.body;
 
       if(!urlImage || !title || !actor || !ageGroup || !genre || !duration || !score || !description || !releaseYear){
-        response.status(422).json({
+        response.status(400).json({
           message: "Erro ao criar o filme",
           error: "Todos os campos devem estar preenchidos"
+        })
+        return;
+      }
+
+      if(title.length > 50){
+        response.status(400).json({
+          message: "Erro ao criar o filme",
+          error: 'O TITLE não pode ser maior que 50 caracteres.'
+        })
+        return;
+      }
+
+      if(actor.length > 300){
+        response.status(400).json({
+          message: "Erro ao criar o filme",
+          error: 'O ACTOR não pode ser maior que 300 caracteres.'
+        })
+        return;
+      }
+
+      if(ageGroup.length > 20){
+        response.status(400).json({
+          message: "Erro ao criar o filme",
+          error: 'O AGEGROUP não pode ser maior que 20 caracteres.'
+        })
+        return;
+      }
+
+      if(genre.length > 100){
+        response.status(400).json({
+          message: "Erro ao criar o filme",
+          error: 'O GENRE não pode ser maior que 100 caracteres.'
+        })
+        return;
+      }
+
+      if(duration.length > 10){
+        response.status(400).json({
+          message: "Erro ao criar o filme",
+          error: 'O DURATION não pode ser maior que 10 caracteres.'
+        })
+        return;
+      }
+
+      if(releaseYear.length > 10){
+        response.status(400).json({
+          message: "Erro ao criar o filme",
+          error: 'O RELEASEYEAR não pode ser maior que 10 caracteres.'
+        })
+        return;
+      }
+
+      const scoreConv = Number(score.replace(",", "."))
+
+      if(!scoreConv || scoreConv < 0 || scoreConv > 5){
+        response.status(400).json({
+          message: "Erro ao criar o filme",
+          error: 'O SCORE deve ser um valor entre 0 e 5.'
         })
         return;
       }
@@ -118,30 +191,29 @@ export default class MovieController {
 
     return;
 
-    /*
-      #swagger.tags = ['MOVIE ROUTES']
-      #swagger.description = 'Insere um NOVO filme na Base de Dados'
-
-      #swagger.parameters['body'] = {
-        in: 'body',
-        description: 'Movie Data',
-        required: true,
-        schema: {
-          urlImage: "string",
-          title: "string",
-          actor: "string",
-          ageGroup: "string",
-          genre: "string",
-          duration: "string",
-          score: "string",
-          description: "string",
-          releaseYear: "string"
-        }
-      }
-    */
   }
 
   static async update(request, response){
+
+    /*
+      #swagger.tags = ['MOVIE ROUTES']
+      #swagger.summary = 'Atualizar UM Filme'
+      #swagger.description = 'ATUALIZA UM Filme pelo ID'
+
+      #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'Movie ID',
+        required: true,
+        type: 'integer'
+      }
+    
+      #swagger.parameters['body'] = { 
+        in: 'body',
+        description: 'Movie Data',
+        required: true,
+        '@schema': { $ref: "#/components/movieSchema/@schema" },
+      }
+    */
     
     try {
 
@@ -159,9 +231,67 @@ export default class MovieController {
       } = request.body;
 
       if(!urlImage || !title || !actor || !ageGroup || !genre || !duration || !score || !description || !releaseYear){
-        response.status(422).json({
+        response.status(400).json({
           message: "Erro ao atualizar o filme",
           error: "Todos os campos devem estar preenchidos"
+        })
+        return;
+      }
+
+      if(title.length > 50){
+        response.status(400).json({
+          message: "Erro ao atualizar o filme",
+          error: "O TITLE não pode ser maior que 50 caracteres."
+        })
+        return;
+      }
+
+      if(actor.length > 300){
+        response.status(400).json({
+          message: "Erro ao atualizar o filme",
+          error: 'O ACTOR não pode ser maior que 300 caracteres.'
+        })
+        return;
+      }
+
+      if(ageGroup.length > 20){
+        response.status(400).json({
+          message: "Erro ao atualizar o filme",
+          error: 'O AGEGROUP não pode ser maior que 20 caracteres.'
+        })
+        return;
+      }
+
+      if(genre.length > 100){
+        response.status(400).json({
+          message: "Erro ao atualizar o filme",
+          error: 'O GENRE não pode ser maior que 100 caracteres.'
+        })
+        return;
+      }
+
+      if(duration.length > 10){
+        response.status(400).json({
+          message: "Erro ao atualizar o filme",
+          error: 'O DURATION não pode ser maior que 10 caracteres.'
+        })
+        return;
+      }
+
+      if(releaseYear.length > 10){
+        response.status(400).json({
+          message: "Erro ao atualizar o filme",
+          error: 'O RELEASEYEAR não pode ser maior que 10 caracteres.'
+        })
+        return;
+      }
+
+      const scoreConv = Number(score.replace(",", "."))
+
+      if(!scoreConv || scoreConv < 0 || scoreConv > 5){
+        response.status(400).json({
+          message: "Erro ao criar o filme",
+          error: 'O SCORE deve ser um valor entre 0 e 5.'
         })
         return;
       }
@@ -205,10 +335,15 @@ export default class MovieController {
     }
 
     return;
+    
+  }
+
+  static async delete(request, response){
 
     /*
       #swagger.tags = ['MOVIE ROUTES']
-      #swagger.description = 'ATUALIZA UM Filme pelo ID'
+      #swagger.summary = 'Excluir UM Filme'
+      #swagger.description = 'EXCLUI UM Filme pelo ID'
 
       #swagger.parameters['id'] = {
         in: 'path',
@@ -216,28 +351,7 @@ export default class MovieController {
         required: true,
         type: 'integer'
       }
-    
-      #swagger.parameters['body'] = {
-        in: 'body',
-        description: 'Movie Data',
-        required: true,
-        schema: {
-          urlImage: "string",
-          title: "string",
-          actor: "string",
-          ageGroup: "string",
-          genre: "string",
-          duration: "string",
-          score: "string",
-          description: "string",
-          releaseYear: "string"
-        }
-      }
     */
-    
-  }
-
-  static async delete(request, response){
 
     try {
 
@@ -268,18 +382,6 @@ export default class MovieController {
         error: error
       })
     }
-
-    /*
-      #swagger.tags = ['MOVIE ROUTES']
-      #swagger.description = 'EXCLUI UM Filme pelo ID'
-
-      #swagger.parameters['id'] = {
-        in: 'path',
-        description: 'Movie ID',
-        required: true,
-        type: 'integer'
-      }
-    */
 
     return
     

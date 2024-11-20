@@ -16,6 +16,7 @@
         "tags": [
           "MOVIE ROUTES"
         ],
+        "summary": "Encontrar TODOS os Filmes",
         "description": "Retorna TODOS os Filmes",
         "responses": {
           "200": {
@@ -32,6 +33,7 @@
         "tags": [
           "MOVIE ROUTES"
         ],
+        "summary": "Encontrar UM Filme",
         "description": "RETORNA UM Filme pelo ID",
         "parameters": [
           {
@@ -60,6 +62,7 @@
         "tags": [
           "MOVIE ROUTES"
         ],
+        "summary": "Inserir UM novo Filme",
         "description": "Insere um NOVO filme na Base de Dados",
         "parameters": [
           {
@@ -68,51 +71,16 @@
             "description": "Movie Data",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "urlImage": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "title": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "actor": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "ageGroup": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "genre": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "duration": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "score": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "description": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "releaseYear": {
-                  "type": "string",
-                  "example": "string"
-                }
-              }
+              "$ref": "#/components/movieSchema/@schema"
             }
           }
         ],
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "422": {
             "description": "Unprocessable Entity"
@@ -125,6 +93,7 @@
         "tags": [
           "MOVIE ROUTES"
         ],
+        "summary": "Atualizar UM Filme",
         "description": "ATUALIZA UM Filme pelo ID",
         "parameters": [
           {
@@ -140,51 +109,16 @@
             "description": "Movie Data",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "urlImage": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "title": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "actor": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "ageGroup": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "genre": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "duration": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "score": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "description": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "releaseYear": {
-                  "type": "string",
-                  "example": "string"
-                }
-              }
+              "$ref": "#/components/movieSchema/@schema"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
@@ -198,6 +132,7 @@
         "tags": [
           "MOVIE ROUTES"
         ],
+        "summary": "Excluir UM Filme",
         "description": "EXCLUI UM Filme pelo ID",
         "parameters": [
           {
@@ -217,6 +152,77 @@
           },
           "422": {
             "description": "Unprocessable Entity"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "movieSchema": {
+      "@schema": {
+        "required": [
+          "urlImage",
+          "title",
+          "actor",
+          "ageGroup",
+          "genre",
+          "duration",
+          "score",
+          "description",
+          "releaseYear"
+        ],
+        "properties": {
+          "urlImage": {
+            "type": "string",
+            "minLength": 2,
+            "example": "https://exemplo-url-imagem.png"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "example": "Exemplo de título..."
+          },
+          "actor": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300,
+            "example": "Ator A, Ator B..."
+          },
+          "ageGroup": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20,
+            "example": "Livre, 12, 14, 16, 18"
+          },
+          "genre": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "example": "Ação, Drama, Comédia..."
+          },
+          "duration": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10,
+            "example": "110 min"
+          },
+          "score": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10,
+            "example": "3,12"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "example": "Alguma descrição do Filme..."
+          },
+          "releaseYear": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10,
+            "example": "2014"
           }
         }
       }
