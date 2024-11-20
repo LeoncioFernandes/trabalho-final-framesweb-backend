@@ -12,7 +12,7 @@ export default class MovieController {
 
     try {
 
-      const movies = await Movie.findAll()
+      const movies = await Movie.findAll({order: [['title', 'ASC']]})
 
       response.status(200).json({movies: movies});
       
