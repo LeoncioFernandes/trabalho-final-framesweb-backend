@@ -7,7 +7,7 @@ export default class MovieController {
     /*
       #swagger.tags = ['MOVIE ROUTES']
       #swagger.summary = 'Encontrar TODOS os Filmes'
-      #swagger.description = 'Retorna TODOS os Filmes'
+      #swagger.description = 'Retorna TODOS os Filmes ordenados pelo TÍTULO ASCENDENTEMENTE'
     */
 
     try {
