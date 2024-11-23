@@ -1,3 +1,4 @@
+import { Sequelize } from "sequelize";
 import Movie from "../models/Movie.js";
 
 export default class MovieController {
@@ -25,6 +26,47 @@ export default class MovieController {
 
     return;
    
+  }
+
+  static async findByTitle(request, response){
+
+    /*
+      #swagger.tags = ['MOVIE ROUTES']
+      #swagger.summary = 'Encontrar filmes pelo TITLE'
+      #swagger.description = 'RETORNA TODOS os filmes que CONTÉM no TITLE'
+
+      #swagger.parameters['title'] = {
+        in: 'path',
+        description: 'Movie TITLE',
+        required: true,
+        type: 'string'
+      }
+    */
+
+    try {
+
+      const {title} = request.params;
+      
+      const movies = await Movie.findAll({
+        where: {
+          title: {
+            [Sequelize.Op.like]: `%${title}%`
+          }
+        },
+        order: [['title', 'ASC']]
+      })
+
+      response.status(200).json({movies: movies});
+      
+    } catch (error) {
+      response.status(422).json({
+        message: "Erro pegar um filme",
+        error: error
+      })
+    }
+
+    return;
+
   }
 
   static async findOne(request, response){

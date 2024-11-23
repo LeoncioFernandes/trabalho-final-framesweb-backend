@@ -28,7 +28,33 @@
         }
       }
     },
-    "/movies/{id}": {
+    "/movies/{title}": {
+      "get": {
+        "tags": [
+          "MOVIE ROUTES"
+        ],
+        "summary": "Encontrar filmes pelo TITLE",
+        "description": "RETORNA TODOS os filmes que CONTÉM no TITLE",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Movie TITLE"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/movie/{id}": {
       "get": {
         "tags": [
           "MOVIE ROUTES"
@@ -55,40 +81,7 @@
             "description": "Unprocessable Entity"
           }
         }
-      }
-    },
-    "/movie": {
-      "post": {
-        "tags": [
-          "MOVIE ROUTES"
-        ],
-        "summary": "Inserir UM novo Filme",
-        "description": "Insere um NOVO filme na Base de Dados",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Movie Data",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/movieSchema/@schema"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        }
-      }
-    },
-    "/movie/{id}": {
+      },
       "put": {
         "tags": [
           "MOVIE ROUTES"
@@ -149,6 +142,37 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/movie": {
+      "post": {
+        "tags": [
+          "MOVIE ROUTES"
+        ],
+        "summary": "Inserir UM novo Filme",
+        "description": "Insere um NOVO filme na Base de Dados",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Movie Data",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/movieSchema/@schema"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "422": {
             "description": "Unprocessable Entity"
